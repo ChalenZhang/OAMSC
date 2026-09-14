@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*.log
+*.pth
+*.pt
+*.csv.tmp
+.DS_Store
+Thumbs.db
+runs/
+outputs/
+
+# Cityscapes data must never be committed. Its expected layout is documented
+# centrally in data/Cityscapes-Multi-Style/README.md.
+data/Cityscapes-Multi-Style/*/images/
+data/Cityscapes-Multi-Style/*/labels/
+
+# Full RealDriveSim derivatives are GitHub Release assets, not Git objects.
+data/RealDriveSim-Multi-Style/*/images/
+data/RealDriveSim-Multi-Style/*/labels/

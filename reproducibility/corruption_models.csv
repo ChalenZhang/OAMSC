@@ -1,0 +1,2 @@
+run,checkpoint
+cityscapes-21-ema,weights/oamsc-cityscapes-21-ema.pth

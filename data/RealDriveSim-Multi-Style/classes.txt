@@ -1,0 +1,7 @@
+0 bicycle
+1 bus
+2 car
+3 motorcycle
+4 person
+5 rider
+6 truck

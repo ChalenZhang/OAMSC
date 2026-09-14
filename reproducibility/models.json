@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "architecture": "Faster R-CNN with ResNet-101-FPN and FrozenBatchNorm2d",
+  "classes": ["background", "bicycle", "bus", "car", "motorcycle", "person", "rider", "truck"],
+  "evaluation": {
+    "trainable_layers": 3,
+    "min_size": 800,
+    "max_size": 1333,
+    "weights_type": "ema",
+    "score_threshold": 0.001,
+    "detections_per_img": 300,
+    "metric_max_detections": 100,
+    "batch_size": 2
+  },
+  "inference_precision": "float32",
+  "normalization_mean": [0.485, 0.456, 0.406],
+  "normalization_std": [0.229, 0.224, 0.225],
+  "box_nms_threshold": 0.5,
+  "rpn_nms_threshold": 0.7,
+  "rpn_test_pre_nms_top_n": 1000,
+  "rpn_test_post_nms_top_n": 1000,
+  "models": {
+    "cityscapes-21-ema": {
+      "file": "oamsc-cityscapes-21-ema.pth",
+      "source": "Cityscapes",
+      "views_including_origin": 21,
+      "selection": "fixed-endpoint",
+      "epoch": 27,
+      "ema_updates": 20088,
+      "reported_rows": ["Cityscapes to BDD100K daytime-clear", "Cityscapes to Foggy Cityscapes", "Cityscapes to Rainy Cityscapes"],
+      "corruption_note": "Seven-class and car-only metrics are stored separately in statistics/corruption_summary.csv."
+    },
+    "realdrivesim-21-ema-validation": {
+      "file": "oamsc-realdrivesim-21-ema-validation.pth",
+      "source": "RealDriveSim",
+      "views_including_origin": 21,
+      "selection": "target-validation",
+      "epoch": 13,
+      "ema_updates": 19000,
+      "reported_rows": ["RealDriveSim to Cityscapes", "RealDriveSim to BDD100K daytime-all"],
+      "selection_note": "Selected on sampled target validation data. Reference scores use this checkpoint."
+    },
+    "realdrivesim-21-ema-endpoint": {
+      "file": "oamsc-realdrivesim-21-ema-endpoint.pth",
+      "source": "RealDriveSim",
+      "views_including_origin": 21,
+      "selection": "fixed-endpoint",
+      "epoch": 13,
+      "ema_updates": 19500,
+      "reported_rows": [],
+      "selection_note": "Fixed-endpoint checkpoint; no recorded full-split reference scores."
+    }
+  },
+  "benchmarks": {
+    "bdd-daytime-clear": {"images": 1764, "filter": "BDD100K validation; timeofday=daytime; weather=clear"},
+    "foggy-cityscapes": {"images": 500, "filter": "Foggy Cityscapes validation; beta=0.02"},
+    "rainy-cityscapes": {"images": 396, "filter": "Rainy Cityscapes validation; alpha=0.02; beta/dropsize/pattern=all"},
+    "cityscapes": {"images": 500, "filter": "Cityscapes validation"},
+    "bdd-daytime-all": {"images": 5258, "filter": "BDD100K validation; timeofday=daytime; weather=all"}
+  }
+}

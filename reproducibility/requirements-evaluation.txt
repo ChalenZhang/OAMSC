@@ -1,0 +1,8 @@
+torch==2.11.0
+torchvision==0.26.0
+torchmetrics==1.9.0
+Pillow==12.2.0
+numpy
+pycocotools
+imagecorruptions==1.1.2
+scikit-image==0.26.0
