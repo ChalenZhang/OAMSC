@@ -108,11 +108,9 @@ The same Origin-plus-prompt procedure can also be used with:
 | [FLUX.2 pro](https://docs.bfl.ai/flux_2/flux2_image_editing) (`flux-2-pro`) | Use single-reference editing with the Origin as the input image. |
 | [Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511) | Run the available weights locally with an image input and an editing prompt. |
 
-These are alternatives for producing similar types of appearance variation,
-not the generators used for the original bank. Identical images or detector
-scores are not guaranteed; apply the same full manual inspection and
-regeneration procedure. Use a local deployment for restricted images;
-a hosted editor requires permission covering disclosure to its provider.
+Apply the same full manual inspection and regeneration procedure.
+Use a local deployment for restricted images; a hosted editor requires
+permission covering disclosure to its provider.
 
 The [RealDriveSim multi-style release](../RealDriveSim-Multi-Style/README.md)
 provides distributable examples of the same generation and acceptance
