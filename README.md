@@ -4,30 +4,32 @@ Code and data for Origin-Anchored Multi-Style Consistency (OAMSC).
 
 ## Models and Evaluation
 
-- **[Download models and evaluation code](https://github.com/ChalenZhang/OAMSC/releases/download/models-v1.0/OAMSC-Evaluation-v1.0.zip)**
-- **[Download minimal statistics](https://github.com/ChalenZhang/OAMSC/releases/download/models-v1.0/OAMSC-Statistics-v1.0.zip)**
+The `models-v1.0` release contains `OAMSC-Evaluation-v1.0.zip` and
+`OAMSC-Statistics-v1.0.zip`. From a local Git checkout, download them with
+[GitHub CLI](https://cli.github.com/):
+
+```bash
+gh release download models-v1.0 --pattern 'OAMSC-*.zip' --dir downloads
+```
 
 The evaluation bundle provides three EMA detectors, code, and fixed settings.
 Supply the test data locally to rerun evaluation without commercial style
-images. The statistics bundle contains aggregate experimental records.
+images. The [statistics](reproducibility/statistics/) are also included in
+the repository.
 See the [evaluation guide](reproducibility/README.md) for
 commands, model selection, and evaluation protocols.
 
 ## Dataset Download
 
-**[Open the RealDriveSim Multi-Style Dataset release](https://github.com/ChalenZhang/OAMSC/releases/tag/data-v1.0)**
-
-The dataset files are stored under **Assets** on that release page, not in
-the repository tree. The release provides 119,983 generated images across
+The `data-v1.0` release provides 119,983 generated RealDriveSim images across
 20 styles together with matching seven-class YOLO labels. The original
 RealDriveSim images are not duplicated.
 
-Download every style with [GitHub CLI](https://cli.github.com/):
+Download every style from a local Git checkout:
 
 ```bash
 mkdir -p /path/to/OAMSC-downloads
 gh release download data-v1.0 \
-  --repo ChalenZhang/OAMSC \
   --pattern 'OAMSC-RealDriveSim-Multi-Style-v1.0--*.tar.part-*' \
   --dir /path/to/OAMSC-downloads \
   --skip-existing
@@ -39,7 +41,6 @@ To download one style, replace `Oil-Painting` with a name from
 ```bash
 STYLE=Oil-Painting
 gh release download data-v1.0 \
-  --repo ChalenZhang/OAMSC \
   --pattern "OAMSC-RealDriveSim-Multi-Style-v1.0--*-${STYLE}.tar.part-*" \
   --dir /path/to/OAMSC-downloads \
   --skip-existing
@@ -74,6 +75,13 @@ The extracted files appear under:
 - [`data/Cityscapes-Multi-Style/`](data/Cityscapes-Multi-Style/): local
   reproduction guide. Cityscapes-derived images are not redistributed.
 
+## Cityscapes 20-Style Dataset
+
+**Coming soon, subject to authorization.** We are seeking permission from
+the relevant rights holders to distribute the Cityscapes style bank. The
+[Cityscapes guide](data/Cityscapes-Multi-Style/README.md) explains the
+license restrictions, generation procedure, prompts, and quality checks.
+
 ## Setup
 
 ```bash
@@ -100,6 +108,9 @@ format for Faster R-CNN.
 
 ## Source and Terms
 
+Original papers and dataset providers are linked in the
+[data sources](data/README.md#original-datasets).
+
 The released images are appearance-transferred derivatives of the public
 [RealDriveSim](https://realdrivesim.github.io/) dataset, which is licensed
 under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The source
@@ -113,7 +124,7 @@ described in the [model distribution notes](reproducibility/README.md#distributi
 
 This repository is provided for non-commercial academic research and
 scholarly exchange. Third-party materials remain subject to their original
-terms. Please report substantiated copyright, privacy, licensing, or other
-rights concerns through the [issue tracker](https://github.com/ChalenZhang/OAMSC/issues).
+terms. Please report copyright, privacy, licensing, or other rights concerns
+through the repository's issue tracker.
 The maintainers will review them promptly and, where appropriate, correct or
 remove affected material.

@@ -26,7 +26,8 @@ contains the corresponding validation images under `images/` and original
 annotations under `labels/`, as expected by the included converters. BDD100K
 annotations are per-image JSON; Cityscapes annotations are polygon JSON with
 their original city subdirectories. Download them from the official dataset
-providers under their terms. Test data is not bundled.
+providers under their terms; [original papers and data links](../data/README.md#original-datasets)
+are listed in the data guide. Test data is not bundled.
 
 ```bash
 python code/prepare_fasterrcnn_bdd100k.py \
@@ -118,24 +119,6 @@ python code/evaluate_cityscapes_corruption_precomputed.py \
   --manifest reproducibility/corruption_models.csv --weights-type ema \
   --workers 4 --out-dir /path/to/Evaluation-Results/corruption
 ```
-
-## Local Feature Statistics
-
-The optional utility accepts local `<Canonical-Style>.npy` matrices with shape
-`(examples, channels)` from one identified frozen extractor:
-
-```bash
-python code/summarize_feature_pool.py \
-  --input-dir /path/to/Local-Feature-Pool \
-  --style-names data/Cityscapes-Multi-Style/style_names.txt \
-  --extractor frozen-resnet101-fpn-v1 \
-  --min-count 100 --out /path/to/Statistics/style-moments.json
-```
-
-The utility outputs per-style counts, means, and population variances.
-Feature arrays and measured moments are not included. OAMSC training requires
-scene-aligned images and boxes with an updating student and EMA teacher;
-fixed feature statistics are not a substitute.
 
 ## Distribution
 

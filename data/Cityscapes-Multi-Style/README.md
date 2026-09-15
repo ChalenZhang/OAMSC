@@ -1,12 +1,16 @@
 # Cityscapes Multi-Style Reproduction Guide
 
+We thank the [Cityscapes](https://www.cityscapes-dataset.com/) team and
+contributors for their work and respect the conditions under which they
+share the dataset. See the [original publication](https://openaccess.thecvf.com/content_cvpr_2016/html/Cordts_The_Cityscapes_Dataset_CVPR_2016_paper.html).
+
 Model weights and evaluation commands are in the
 [evaluation guide](../../reproducibility/README.md).
 
-## Why Images Are Not Included
+## License and Availability
 
-This repository intentionally distributes no Cityscapes Origin image,
-style-transferred image, or inherited annotation. The official
+The Cityscapes style bank cannot be distributed directly under the current
+license. The official
 [Cityscapes Terms and Conditions](https://www.cityscapes-dataset.com/license/)
 contain two directly relevant restrictions:
 
@@ -18,6 +22,11 @@ contain two directly relevant restrictions:
 
 Obtain images and annotations from Cityscapes under its terms and keep
 style-transferred views local unless the rights holder authorizes distribution.
+
+**Dataset download: Coming soon, subject to authorization.** We are seeking
+permission from the relevant rights holders to release the 20-style bank.
+Download information will be added once authorization is granted. The model
+and statistics packages are available separately.
 
 ## Generation Models and Style Bank
 
@@ -63,17 +72,10 @@ generator invoked during detector training or inference.
    under `<STYLE_NAME>/images/` and its unchanged authorized local label
    under `<STYLE_NAME>/labels/`. Retain the original image and label in
    `Origin/images/` and `Origin/labels/`.
-6. Record failed or unavailable views instead of inventing correspondence.
-   The preparation scripts tolerate missing styles while preserving the
-   scene and style identifiers of retained files. Convert the accepted bank
+6. Retain scene and style identifiers for accepted views and record missing
+   views. Convert the accepted bank
    with [the COCO preparation script](../../code/prepare_fasterrcnn_fixed_all_scenes.py)
    before following the [training commands](../../code/README.md).
-
-The Faster R-CNN pipeline uses an ImageNet-pretrained ResNet-101-FPN.
-Each training group contains one Origin and three accepted styles with a
-shared geometric transform. All four images supervise the student;
-styled student features align with the EMA teacher's Origin features at
-global FPN and GT-RoI levels.
 
 ## Prompt Templates
 
@@ -104,7 +106,6 @@ The same Origin-plus-prompt procedure can also be used with:
 
 | Model | Use |
 | --- | --- |
-| [GPT Image 2.5 Sunburst](https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst) | Supply the Origin and the style instruction to image editing. |
 | [FLUX.2 pro](https://docs.bfl.ai/flux_2/flux2_image_editing) (`flux-2-pro`) | Use single-reference editing with the Origin as the input image. |
 | [Qwen-Image-Edit-2511](https://huggingface.co/Qwen/Qwen-Image-Edit-2511) | Run the available weights locally with an image input and an editing prompt. |
 
@@ -114,9 +115,7 @@ permission covering disclosure to its provider.
 
 The [RealDriveSim multi-style release](../RealDriveSim-Multi-Style/README.md)
 provides distributable examples of the same generation and acceptance
-procedure. Questions about the procedure or rights concerns can be submitted
-to the repository maintainers through the
-[GitHub issue tracker](https://github.com/ChalenZhang/OAMSC/issues).
+procedure.
 
 ## Canonical Layout
 

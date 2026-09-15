@@ -5,8 +5,7 @@ Model weights and evaluation commands are in the
 
 ## Download
 
-**[Open the dataset release](https://github.com/ChalenZhang/OAMSC/releases/tag/data-v1.0)**
-and expand **Assets**, or use the commands in the
+Download the `data-v1.0` release using the commands in the
 [root download section](../../README.md#dataset-download).
 
 The release contains 119,983 manually accepted style-transferred images and

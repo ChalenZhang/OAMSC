@@ -1,4 +1,4 @@
-"""Focused checks for portable model exports and aggregate feature statistics."""
+"""Focused checks for portable model exports and evaluation settings."""
 
 import json
 import sys
@@ -7,14 +7,12 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import numpy as np
 import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "code"))
 
 from export_inference_checkpoint import export_checkpoint
-from summarize_feature_pool import moments
 from train_fasterrcnn_resnet101 import build_model
 from evaluate_released_model import validate_categories
 
@@ -51,17 +49,6 @@ class ReproducibilityTests(unittest.TestCase):
                         "decay": 0.9998, "updates": 1}}, source)
             with self.assertRaises(ValueError):
                 export_checkpoint(source, Path(directory) / "out.pth")
-
-    def test_batched_moments_match_direct_computation(self):
-        values = np.random.default_rng(7).normal(size=(37, 5)) + 1000
-        count, mean, variance = moments(values, chunk_size=6)
-        self.assertEqual(count, len(values))
-        np.testing.assert_allclose(mean, values.mean(0), rtol=1e-12)
-        np.testing.assert_allclose(variance, values.var(0), rtol=1e-12)
-        with self.assertRaises(ValueError):
-            moments(np.empty((0, 5)))
-        with self.assertRaises(ValueError):
-            moments(np.array([[np.nan]]))
 
     def test_category_mapping_is_checked(self):
         names = ["bicycle", "bus", "car", "motorcycle", "person", "rider", "truck"]
